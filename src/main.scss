@@ -1,0 +1,69 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+section {
+  animation: route 300ms cubic-bezier(.21,.64,.45,1.02);
+  transform: translateX(0%);
+}
+
+
+/// tailwind components ///
+
+@layer components {
+  .heading {
+    @apply text-4xl md:text-7xl text-center font-bold text-transparent bg-clip-text bg-gradient-to-br from-primary to-amber-950 border-b-2 border-b-primary/10 mb-6 md:mb-8 pb-4;
+  }
+
+  .btn {
+    @apply uppercase;
+  }
+
+  .breadcrumbs {
+    @apply text-primary;
+  }
+  
+  .scroll-watcher {
+    @apply bg-primary fixed top-0 z-50 w-full h-[1px]; 
+    scale: 0 1;
+    animation: scroll-animation linear;
+    animation-timeline: scroll();
+    transform-origin: left;
+  }
+}
+
+/// fonts ///
+
+.lobster {
+  font-family: "Lobster", sans-serif;
+}
+
+.urbanist {
+  font-family: "Urbanist", sans-serif;
+}
+
+/// animations ///
+
+@keyframes route {
+  from {
+    transform: translateX(15px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@keyframes scroll-animation {
+  to {
+    scale: 1 1;
+  }
+}
+
