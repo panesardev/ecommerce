@@ -1,0 +1,29 @@
+<section>
+  <h1 class="heading">New Arrivals</h1>
+
+  <div class="grid md:grid-cols-[2fr_5fr] lg:grid-cols-[1fr_3fr] xl:grid-cols-[1fr_5fr] gap-8">
+    <div class="grid gap-4 h-fit">
+      <h1 class="font-bold text-2xl">Categories</h1>
+
+      <div class="grid">
+        <span class="filter {{ category() == null && 'active' }}" (click)="category.set(null)">Show all</span>
+        @for (c of categories(); track $index) {
+          <span class="filter {{ category() == c && 'active' }}" (click)="category.set(c)">{{ c.name }}</span>
+        }
+      </div>
+
+      <h1 class="font-bold text-2xl">Price Filter</h1>
+
+      <div class="grid">
+        <span class="filter {{ priceFilter() == 'DEFAULT' && 'active' }}" (click)="priceFilter.set('DEFAULT')">Default</span>
+        <span class="filter {{ priceFilter() == 'HIGH-LOW' && 'active' }}" (click)="priceFilter.set('HIGH-LOW')">High To Low</span>
+        <span class="filter {{ priceFilter() == 'LOW-HIGH' && 'active' }}" (click)="priceFilter.set('LOW-HIGH')">Low To High</span>
+      </div>
+    </div>
+    <div>
+      <h1 class="text-lg font-bold mb-6">Showing {{ products && products.length }} results</h1>
+
+      <!-- <app-product-list [products]="products()" (addToCart)="addToCart($event)"/> -->
+    </div>
+  </div>
+</section>

@@ -1,16 +1,25 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import FooterComponent from './layout/footer/footer.component';
+import NavbarComponent from './layout/navbar/navbar.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [
+    // RouterOutlet,
+    // NavbarComponent,
+    // FooterComponent,
+  ],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <!-- <div class="scroll-watcher"></div>
+    <app-navbar>
+      <main class="max-w-[1920px] mx-auto px-4 py-8 md:px-8 md:py-12">
+        <router-outlet />
+      </main>
+      <app-footer />
+    </app-navbar> -->
   `,
-  styles: [],
 })
 export class AppComponent {
-  title = 'ecommerce';
+
 }
