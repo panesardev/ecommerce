@@ -6,18 +6,18 @@ import NavbarComponent from './layout/navbar/navbar.component';
 @Component({
   selector: 'app-root',
   imports: [
-    // RouterOutlet,
-    // NavbarComponent,
-    // FooterComponent,
+    RouterOutlet,
+    NavbarComponent,
+    FooterComponent,
   ],
   template: `
-    <!-- <div class="scroll-watcher"></div>
+    <div class="scroll-watcher"></div>
     <app-navbar>
-      <main class="max-w-[1920px] mx-auto px-4 py-8 md:px-8 md:py-12">
+      <main class="px-4 py-8 md:px-8">
         <router-outlet />
       </main>
       <app-footer />
-    </app-navbar> -->
+    </app-navbar>
   `,
 })
 export class AppComponent {

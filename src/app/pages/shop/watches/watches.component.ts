@@ -4,44 +4,38 @@ import { ProductListComponent } from '@app/domains/products/components/product-l
 import { Category, PriceFilter } from '@app/domains/products/product.interface';
 import { ProductService } from '@app/domains/products/product.service';
 import { applyPriceFilter } from '@app/domains/products/product.utils';
-import { BehaviorSubject, combineLatest, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, switchMap, zip } from 'rxjs';
 
 @Component({
-  selector: 'app-new-arrivals',
+  selector: 'app-watches',
   imports: [
     AsyncPipe,
     ProductListComponent,
   ],
-  templateUrl: './new-arrivals.component.html',
+  templateUrl: './watches.component.html',
 })
-export default class NewArrivalsComponent {
+export default class WatchesComponent {
   private productService = inject(ProductService);
 
   selectedCategory$ = new BehaviorSubject<Category>(null);
   selectedPriceFilter$ = new BehaviorSubject<PriceFilter>('DEFAULT');
 
   categories$ = this.productService.categories$.pipe(
-    map(categories => categories.filter(category => !category.slug.startsWith('mens'))), // remove mens shirts shoes watches 
-    map(categories => categories.filter(category => !category.slug.startsWith('womens'))), // remove womens bags dresses jewellery shoes watches
-    map(categories => [
-      { slug: 'mens', name: 'Mens' },
-      { slug: 'womens', name: 'Womens' },
-      ...categories,
-    ]), // add mens and womens
+    map(categories => categories.filter(category => category.slug.includes('watches'))),
   );
 
   products$ = combineLatest({
-    products: this.productService.products$, 
+    products: this.categories$.pipe(
+      map(categories => categories.map(category => this.productService.findByCategory(category))),
+      switchMap(array => zip(array)),
+      map(products2d => products2d.reduce((a, c) => [...a, ...c])),
+    ), 
     category: this.selectedCategory$, 
     priceFilter: this.selectedPriceFilter$,
   }).pipe(
     map(({ products, category, priceFilter }) => {
       if (category) {
-        if (category.slug.startsWith('mens') || category.slug.startsWith('womens')) {
-          products = products.filter(product => product.category.startsWith(category.slug));
-        } else {
-          products = products.filter(product => product.category === category.slug);
-        }
+        products = products.filter(product => product.category === category.slug);
       }
       if (priceFilter) {
         products = applyPriceFilter(products, priceFilter);
@@ -50,12 +44,12 @@ export default class NewArrivalsComponent {
     }),
   );
 
-  setCategory(category: Category): void {
+  setCategory(category: Category) {
     this.selectedCategory$.next(category);
   }
   
-  setPriceFilter(priceFilter: PriceFilter): void {
+  setPriceFilter(priceFilter: PriceFilter) {
     this.selectedPriceFilter$.next(priceFilter);
   }
-  
+
 }

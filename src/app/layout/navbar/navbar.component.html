@@ -2,74 +2,90 @@
   <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
-    <div class="sticky top-0 bg-base-100 flex lg:grid lg:grid-cols-3 justify-between items-center w-full gap-4 md:gap-6 lg:gap-8 p-4 md:px-8">
-      <!-- left -->
-      <div class="flex items-center gap-3">
-        <a class="lobster text-3xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-amber-950" routerLink="/">{{ BRAND }}</a>
-      </div>
-      <!-- center -->
-      <div class="hidden lg:flex text-xl justify-center items-center gap-6">
-        <a class="hover:underline" routerLinkActive="font-bold" routerLink="/new-arrivals">New Arrivals</a>
-        <a class="hover:underline" routerLinkActive="font-bold" routerLink="/about">About</a>
-        <a class="hover:underline" routerLinkActive="font-bold" routerLink="/checkout">Checkout</a>
-        <a class="hover:underline" routerLinkActive="font-bold" routerLink="/login">Login</a>
-        <a class="hover:underline" routerLinkActive="font-bold" routerLink="/privacy">Privacy</a>
-      </div>
-      <!-- right -->
-      <div class="flex justify-end items-center gap-3">
-        <div class="dropdown dropdown-end">
-          <div tabindex="0" role="button" class="btn hover:bg-base-300 btn-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-          </div>
-          <div tabindex="0" class="card card-compact dropdown-content bg-base-200 z-[1] mt-3 w-52">
-            <div class="card-body">
-              <span class="text-lg font-bold">8 Items</span>
-              <span class="text-info">Subtotal: $999</span>
-              <div class="card-actions">
-                <button class="btn btn-primary btn-block">View cart</button>
+    <div class="sticky top-0 z-10">
+      <div class=" bg-base-100 flex lg:grid lg:grid-cols-3 justify-between items-center w-full gap-4 md:gap-6 lg:gap-8 p-4 md:px-8">
+        <!-- left -->
+        <div class="flex items-center gap-3">
+          <a class="lobster text-3xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-amber-950" routerLink="/">{{ BRAND }}</a>
+        </div>
+        <!-- center -->
+        <div class="hidden lg:flex text-lg justify-center items-center gap-6">
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/new-arrivals">New Arrivals</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/about">About</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/checkout">Checkout</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/login">Login</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/privacy">Privacy</a>
+        </div>
+        <!-- right -->
+        <div class="flex justify-end items-center gap-3">
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" class="btn hover:bg-base-300 btn-circle">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+            </div>
+            <div tabindex="0" class="card card-compact dropdown-content bg-base-200 z-[1] mt-3 w-52">
+              <div class="card-body">
+                <span class="text-lg font-bold">8 Items</span>
+                <span class="text-info">Subtotal: $999</span>
+                <div class="card-actions">
+                  <button class="btn btn-primary btn-block">View cart</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="hidden lg:block">
-          <a class="btn hover:bg-base-300 btn-circle" routerLink="/search">
-            <i class="text-lg fa-solid fa-magnifying-glass"></i>
-          </a>
-        </div>
-        <div class="hidden lg:block">
-          <app-user-button />
-        </div>
-        <div class="lg:hidden block">
-          <label for="my-drawer-3" aria-label="open sidebar" class="btn hover:bg-base-300 btn-circle">
-            <i class="text-lg fa-solid fa-bars"></i>
-          </label>
+          <div class="hidden lg:block">
+            <a class="btn hover:bg-base-300 btn-circle" routerLink="/search">
+              <i class="text-lg fa-solid fa-magnifying-glass"></i>
+            </a>
+          </div>
+          <div class="hidden lg:block">
+            @defer {
+              <app-user-button />
+            }
+            @placeholder {
+              <a class="btn hover:bg-base-300 btn-circle" routerLink="/login">
+                <i class="text-lg fa-solid fa-user-astronaut"></i>
+              </a>
+            }
+          </div>
+          <div class="lg:hidden block">
+            <label for="my-drawer-3" aria-label="open sidebar" class="btn hover:bg-base-300 btn-circle">
+              <i class="text-lg fa-solid fa-bars"></i>
+            </label>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="bg-base-300 flex justify-center items-center gap-6 p-3 md:p-4">
-      <a routerLink="/men">Men</a>
-      <a routerLink="/women">Women</a>
-      <a routerLink="/shoes">Shoes</a>
-      <a routerLink="/watches">Watches</a>
+      <div class="md:text-lg bg-base-300 flex justify-center items-center gap-6 p-3 md:p-4">
+        <a routerLink="/mens" routerLinkActive="font-bold">Mens</a>
+        <a routerLink="/womens" routerLinkActive="font-bold">Womens</a>
+        <a routerLink="/shoes" routerLinkActive="font-bold">Shoes</a>
+        <a routerLink="/watches" routerLinkActive="font-bold">Watches</a>
+      </div>
     </div>
     <!-- Page content here -->
     <ng-content />
   </div>
-  <div class="drawer-side">
+  <div class="drawer-side z-20">
     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
     <div class="bg-base-100 h-full w-60 p-4">
       <div class="flex justify-end items-center gap-4 mb-8">
-        <app-user-button />
+        @defer {
+          <app-user-button />
+        }
+        @placeholder {
+          <a class="btn hover:bg-base-300 btn-circle" routerLink="/login">
+            <i class="text-lg fa-solid fa-user-astronaut"></i>
+          </a>
+        }
         <label for="my-drawer-3" role="button" aria-label="close sidebar" class="btn hover:base-300 btn-circle">
           <i class="text-xl fa-solid fa-xmark"></i>
         </label>
       </div>
       <div class="font-bold text-2xl text-right grid gap-2">
-        <a class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/new-arrivals">New Arrivals</a>
-        <a class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/about">About</a>
-        <a class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/checkout">Checkout</a>
-        <a class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/login">Login</a>
-        <a class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/privacy">Privacy</a>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/new-arrivals" for="my-drawer-3" role="link" aria-label="close sidebar">New Arrivals</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/about" for="my-drawer-3" role="link" aria-label="close sidebar">About</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/checkout" for="my-drawer-3" role="link" aria-label="close sidebar">Checkout</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/login" for="my-drawer-3" role="link" aria-label="close sidebar">Login</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/privacy" for="my-drawer-3" role="link" aria-label="close sidebar">Privacy</label>
       </div>
     </div>
   </div>

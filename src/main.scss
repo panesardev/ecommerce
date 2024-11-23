@@ -29,6 +29,18 @@ section {
     @apply text-primary;
   }
   
+  .filter {
+    @apply border-l-4 border-base-100 py-2 transition-all cursor-pointer;
+
+    &:hover {
+      @apply bg-base-300 pl-4;
+    }
+
+    &.active{
+      @apply bg-base-300 border-l-primary pl-4;
+    }
+  }
+  
   .scroll-watcher {
     @apply bg-primary fixed top-0 z-50 w-full h-[1px]; 
     scale: 0 1;

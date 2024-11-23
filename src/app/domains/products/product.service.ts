@@ -1,46 +1,31 @@
 import { HttpClient } from '@angular/common/http';
-import { inject, Injectable, linkedSignal, signal, Signal } from '@angular/core';
-import { rxResource } from '@angular/core/rxjs-interop';
+import { inject, Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import { Category, Product } from './product.interface';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private http = inject(HttpClient);
 
-  // productsResource = rxResource({
-  //   loader: () => this.http.get<Product[]>('/json/products.json'),
-  // })  
-  
-  // categoriesResource = rxResource({
-  //   loader: () => this.http.get<Category[]>('/json/categories.json'),
-  // })
-  
-  // products = this.productsResource.value;
+  products$ = this.http.get<Product[]>('/json/products.json');
+  categories$ = this.http.get<Category[]>('/json/categories.json');
 
-  // categories = this.categoriesResource.value;
-
-  products = signal([]);
-  categories = signal([]);
-
-  // watches = linkedSignal(() => {
-  //   const categories = this.categories().filter(c => c.slug.includes('watches'));
-  //   const productSignals = categories.map(c => this.findByCategory(c));
-  //   const products2d = productSignals.map(signal => signal());
-  //   return products2d.reduce((a, c) => [...a, ...c]);
-  // });
-
-  // shoes = linkedSignal(() => {
-  //   const categories = this.categories().filter(c => c.slug.includes('shoes'));
-  //   const productSignals = categories.map(c => this.findByCategory(c));
-  //   const products2d = productSignals.map(signal => signal());
-  //   return products2d.reduce((a, c) => [...a, ...c]);
-  // });
-
-  findById(id: Product['id']): Signal<Product> {
-    return linkedSignal(() => this.products().find(p => p.id === id));
+  findById(id: Product['id']): Observable<Product> {
+    return this.products$.pipe(
+      map(products => products.find(p => p.id === id)),
+    );
   }
   
-  findByCategory(category: Category): Signal<Product[]> {
-    return linkedSignal(() => this.products().filter(p => p.category === category.slug));
+  findByCategory(category: Category): Observable<Product[]> {
+    return this.products$.pipe(
+      map(products => products.filter(p => p.category === category.slug)),
+    );
+  }
+
+  getCategoryName(slug: string): Observable<string> {
+    return this.categories$.pipe( 
+      map(categories => categories.find(c => c.slug === slug)),
+      map(category => category.name),
+    );
   }
 }

@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { IndexComponent } from './pages/index/index.component';
+import IndexComponent from './pages/index/index.component';
 import { titleResolver } from './shared/resolvers/title.resolver';
 
 export const routes: Route[] = [
@@ -8,11 +8,11 @@ export const routes: Route[] = [
     component: IndexComponent,
     title: titleResolver,
   },
-  // {
-  //   path: '',
-  //   loadChildren: () => import('./pages/shop/shop.routes'),
-  //   title: titleResolver,
-  // },
+  {
+    path: '',
+    loadChildren: () => import('./pages/shop/shop.routes'),
+    title: titleResolver,
+  },
   {
     path: 'about',
     loadComponent: () => import('./pages/about/about.component'),
