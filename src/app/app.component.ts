@@ -13,7 +13,7 @@ import NavbarComponent from './layout/navbar/navbar.component';
   template: `
     <div class="scroll-watcher"></div>
     <app-navbar>
-      <main class="px-4 py-8 md:px-8">
+      <main class="px-4 pt-8 pb-20 md:px-8">
         <router-outlet />
       </main>
       <app-footer />

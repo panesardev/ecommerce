@@ -11,6 +11,7 @@
 section {
   animation: route 300ms cubic-bezier(.21,.64,.45,1.02);
   transform: translateX(0%);
+  min-height: 50vh;
 }
 
 
