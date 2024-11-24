@@ -1,0 +1,57 @@
+<section>
+  <h1 class="heading">Your Cart</h1>
+
+  <div class="max-w-2xl mx-auto">
+    @if (!cart().items.length) {
+      <p>Cart is empty!</p>
+      <a routerLink="/new-arrivals" class="text-primary hover:underline">Shop clothing</a>
+    }
+    
+    @if (cart().items.length) {
+      <div class="grid gap-2 mb-6 md:mb-8">
+        @for (item of cart().items; track item.product.id) {
+          <div class="bg-white flex flex-col md:flex-row justify-between gap-2 md:gap-6 p-4">
+            <div class="flex items-center gap-2 md:gap-4 cursor-pointer" routerLink="/view/{{ item.product.id }}">
+              <img class="w-16" [src]="item.product.images[0]" alt="image">
+              <h1 class="font-bold w-[25ch] md:w-[20ch] text-ellipsis text-nowrap overflow-hidden">{{ item.product.title }}</h1>
+            </div>
+            <div class="flex justify-end items-center gap-6">
+              <div class="bg-base-200 grid place-content-center w-fit h-fit px-3 py-1 rounded-full">{{ '$ ' + item.product.price.toFixed(2) }}</div>
+              <div class="text-center flex justify-center items-center gap-4">
+                <div class="border-slate-200 hover:bg-slate-100 border-2 w-10 py-1 cursor-pointer" (click)="removeProduct(item.product)">-</div>
+                <div class="border-slate-200 bg-slate-100 border-2 w-12 py-1">{{ item.quantity }}</div>
+                <div class="border-slate-200 hover:bg-slate-100 border-2 w-10 py-1 cursor-pointer" (click)="addProduct(item.product)">+</div>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+  
+      <div class="grid max-w-sm gap-4 mx-auto text-lg">
+        <div class="flex justify-between items-center gap-4">
+          <span>Your subtotal</span>
+          <span>$ {{ cart().subtotal.toFixed(2) }}</span>
+        </div>
+        
+        <div class="flex justify-between items-center gap-4">
+          <span>Taxes (13%)</span>
+          <span>$ {{ (cart().subtotal * TAX).toFixed(2) }}</span>
+        </div>
+        
+        <div class="flex justify-between items-center gap-4">
+          <span>Estimated shipping</span>
+          <span class="font-bold text-green-500">FREE</span>
+        </div>
+        <div class="border-[1px] border-base-300"></div>
+        
+        <div class="font-bold flex justify-between items-center gap-4 mb-4">
+          <span>Total Cost</span>
+          <span>$ {{ cart().total.toFixed(2) }}</span>
+        </div>
+
+        <button routerLink="/checkout" class="btn btn-primary">Continue to checkout</button>
+        <button class="btn bg-base-300 hover:bg-base-200 text-red-500 px-6 py-3" (click)="resetCart()">Reset Cart</button>
+      </div>
+    }
+  </div>
+</section>

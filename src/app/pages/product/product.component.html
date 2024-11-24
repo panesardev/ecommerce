@@ -1,0 +1,110 @@
+@if (product(); as product) {
+  <section>
+    <h1 class="heading">{{ product.title }}</h1>
+
+    <div class="grid lg:grid-cols-[4fr_2fr] max-w-6xl gap-6 md:gap-10 mx-auto mb-10">
+      <div>
+        <div class="grid grid-cols-[4fr_1fr] gap-2 lg:mb-10">
+          <div class="bg-white grid items-center">
+            <img [src]="productImage()" alt="image">
+          </div>
+      
+          <div class="flex flex-col gap-2">
+            @for (image of product.images; track $index) {
+              <div class="{{ image === productImage() && 'border-2 border-primary' }} bg-white cursor-pointer h-fit" (click)="productImage.set(image)">
+                <img [src]="image" alt="image">
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="hidden lg:block">
+          <h1 class="text-2xl font-bold mb-6">Customer Reviews ({{ product.reviews.length }})</h1>
+        
+          <div class="bg-base-300 grid gap-6 px-6 md:px-8 py-4 md:py-6">
+            @for (review of product.reviews; track $index) {
+              <div class="{{ $last ? 'pb-2' : 'border-b-2 border-b-base-200 pb-6' }}">
+                <span class="float-right text-xs">{{ getDate(review.date) }}</span>
+                <p class="font-bold mb-1">{{ review.reviewerName }}</p>
+                <div class="flex items-center gap-2 mb-1">
+                  <i class="fa fa-star"></i>
+                  <span>{{ product.rating }}</span>
+                  <span>/</span>
+                  <span>5.00</span>
+                </div>
+                <p>{{ review.comment }}</p>
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="lg:sticky lg:top-24">
+          @if (product.brand) {
+            <div class="bg-white text-primary text-center font-bold w-full mb-6 py-3">{{ product.brand }}</div>
+          }
+          
+          @if (product.rating) {
+            <div class="border-b-2 border-b-base-300 flex items-center gap-2 mb-6 pb-2">
+              <i class="fa fa-star"></i>
+              <span>{{ product.rating }}</span>
+              <span>/</span>
+              <span>5.00</span>
+              <span>({{ product.reviews.length }} reviews)</span>
+            </div>
+          }
+  
+          <div class="flex items-center gap-6 mb-6">
+            @if (product.price) {
+              <div class="bg-white text-primary font-bold px-8 py-3">${{ product.price }}</div>
+            }
+            @if (product.discountPercentage) {
+              <div class="bg-base-300 text-primary font-bold px-8 py-3">{{ product.discountPercentage }}% off</div>
+            }
+          </div>
+  
+          <h1 class="font-bold uppercase mb-1">Description</h1>
+          <p class="mb-10">{{ product.description }}</p>
+  
+          <button class="btn btn-primary w-full mb-10" (click)="addToCart(product)">Add to Cart</button>
+  
+          <h1 class="font-bold uppercase mb-1">details</h1>
+          <div class="flex justify-between items-center gap-4">
+            <span>Dimensions</span>
+            <span>{{ product.dimensions.width }}" x {{ product.dimensions.height }}" x {{ product.dimensions.depth }}"</span>
+          </div>
+          <div class="flex justify-between items-center gap-4">
+            <span>Released date</span>
+            <span>{{ getDate(product.meta.createdAt) }}</span>
+          </div>
+          <div class="flex justify-between items-center gap-4">
+            <span>Update date</span>
+            <span>{{ getDate(product.meta.updatedAt) }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="block lg:hidden">
+      <h1 class="text-2xl font-bold mb-6">Customer Reviews ({{ product.reviews.length }})</h1>
+    
+      <div class="bg-base-300 grid gap-6 px-6 md:px-8 py-4 md:py-6">
+        @for (review of product.reviews; track $index) {
+          <div class="{{ $last ? 'pb-2' : 'border-b-2 border-b-base-200 pb-6' }}">
+            <span class="float-right text-xs">{{ getDate(review.date) }}</span>
+            <p class="font-bold mb-1">{{ review.reviewerName }}</p>
+            <div class="flex items-center gap-2 mb-1">
+              <i class="fa fa-star"></i>
+              <span>{{ product.rating }}</span>
+              <span>/</span>
+              <span>5.00</span>
+            </div>
+            <p>{{ review.comment }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+  </section>
+}
