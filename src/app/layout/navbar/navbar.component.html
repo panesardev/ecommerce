@@ -3,7 +3,7 @@
   <div class="drawer-content flex flex-col">
     <!-- Navbar -->
     <div class="sticky top-0 z-10">
-      <div class=" bg-base-100 flex lg:grid lg:grid-cols-3 justify-between items-center w-full gap-4 md:gap-6 lg:gap-8 p-4 md:px-8">
+      <div class=" bg-base-100 flex lg:grid lg:grid-cols-[1fr_2fr_1fr] justify-between items-center w-full gap-4 md:gap-6 lg:gap-8 p-4 md:px-8">
         <!-- left -->
         <div class="flex items-center gap-3">
           <a class="lobster text-3xl text-transparent bg-clip-text bg-gradient-to-br from-primary to-amber-950" routerLink="/">{{ BRAND }}</a>
@@ -11,10 +11,10 @@
         <!-- center -->
         <div class="hidden lg:flex text-lg justify-center items-center gap-6">
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/new-arrivals">New Arrivals</a>
-          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/about">About</a>
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/checkout">Checkout</a>
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/login">Login</a>
-          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/privacy">Privacy</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/about">About</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/privacy-policy">Privacy</a>
         </div>
         <!-- right -->
         <div class="flex justify-end items-center gap-3">
@@ -45,10 +45,10 @@
         </div>
       </div>
       <div class="md:text-lg bg-base-300 flex justify-center items-center gap-6 p-3 md:p-4">
-        <a routerLink="/mens" routerLinkActive="font-bold">Mens</a>
-        <a routerLink="/womens" routerLinkActive="font-bold">Womens</a>
-        <a routerLink="/shoes" routerLinkActive="font-bold">Shoes</a>
-        <a routerLink="/watches" routerLinkActive="font-bold">Watches</a>
+        <a class="hover:underline" routerLink="/mens" routerLinkActive="font-bold">Mens</a>
+        <a class="hover:underline" routerLink="/womens" routerLinkActive="font-bold">Womens</a>
+        <a class="hover:underline" routerLink="/shoes" routerLinkActive="font-bold">Shoes</a>
+        <a class="hover:underline" routerLink="/watches" routerLinkActive="font-bold">Watches</a>
       </div>
     </div>
     <!-- Page content here -->
@@ -58,9 +58,9 @@
     <label for="my-drawer-3" aria-label="close sidebar" class="drawer-overlay"></label>
     <div class="bg-base-100 h-full w-60 p-4">
       <div class="flex justify-end items-center gap-4 mb-8">
-        <a class="btn hover:bg-base-300 btn-circle" routerLink="/search">
+        <label for="my-drawer-3" role="button" aria-label="close sidebar" class="btn hover:bg-base-300 btn-circle" routerLink="/search">
           <i class="text-lg fa-solid fa-magnifying-glass"></i>
-        </a>
+        </label>
         @defer {
           <app-user-button />
         }
@@ -75,10 +75,10 @@
       </div>
       <div class="font-bold text-2xl text-right grid gap-2">
         <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/new-arrivals" for="my-drawer-3" role="link" aria-label="close sidebar">New Arrivals</label>
-        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/about" for="my-drawer-3" role="link" aria-label="close sidebar">About</label>
         <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/checkout" for="my-drawer-3" role="link" aria-label="close sidebar">Checkout</label>
         <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/login" for="my-drawer-3" role="link" aria-label="close sidebar">Login</label>
-        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/privacy" for="my-drawer-3" role="link" aria-label="close sidebar">Privacy</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/about" for="my-drawer-3" role="link" aria-label="close sidebar">About</label>
+        <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/privacy-policy" for="my-drawer-3" role="link" aria-label="close sidebar">Privacy</label>
       </div>
     </div>
   </div>

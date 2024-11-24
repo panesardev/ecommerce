@@ -1,1 +1,17 @@
-<p>search works!</p>
+<section>
+  <h1 class="heading">Search across shop</h1>
+
+  <div class="max-w-2xl mx-auto mb-8 md:mb-12">
+    <label class="input input-primary input-bordered flex items-center gap-2">
+      <input type="text" [formControl]="text" class="grow" placeholder="Search" />
+      <i class="fa-solid fa-magnifying-glass"></i>
+    </label>
+  </div>
+
+  @if (products$ | async; as products) {
+    <div class="max-w-4xl mx-auto">
+      <p class="font-bold text-center mb-6">Showing {{ products.length }} results</p>
+      <app-product-list [products]="products" />
+    </div>
+  }
+</section>

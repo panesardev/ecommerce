@@ -2,6 +2,8 @@ import { Route } from '@angular/router';
 import IndexComponent from './pages/index/index.component';
 import { titleResolver } from './shared/resolvers/title.resolver';
 import { productResolver, productTitleResolver } from './pages/product/product.resolver';
+import { authGuard } from './auth/auth.guard';
+
 export const routes: Route[] = [
   {
     path: '',
@@ -39,9 +41,15 @@ export const routes: Route[] = [
     title: titleResolver,
   },
   {
-    path: 'privacy',
+    path: 'privacy-policy',
     loadComponent: () => import('./pages/privacy/privacy.component'),
     title: titleResolver,
+  },
+  {
+    path: 'profile',
+    loadComponent: () => import('./pages/profile/profile.component'),
+    title: titleResolver,
+    canActivate: [authGuard],
   },
   {
     path: 'search',

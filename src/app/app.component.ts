@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import FooterComponent from './layout/footer/footer.component';
 import NavbarComponent from './layout/navbar/navbar.component';
+import AcceptPrivacyPolicyComponent from './layout/components/accept-privacy-policy.component';
 
 @Component({
   selector: 'app-root',
@@ -9,6 +10,7 @@ import NavbarComponent from './layout/navbar/navbar.component';
     RouterOutlet,
     NavbarComponent,
     FooterComponent,
+    AcceptPrivacyPolicyComponent,
   ],
   template: `
     <div class="scroll-watcher"></div>
@@ -18,6 +20,7 @@ import NavbarComponent from './layout/navbar/navbar.component';
       </main>
       <app-footer />
     </app-navbar>
+    <app-accept-privacy-policy />
   `,
 })
 export class AppComponent {

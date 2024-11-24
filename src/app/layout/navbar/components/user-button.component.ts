@@ -10,7 +10,7 @@ import { AuthService } from '@app/auth/auth.service';
   ],
   template: `
     @if (user(); as user) {
-      <a class="btn hover:bg-base-300 btn-circle" routerLink="/dashboard">
+      <a class="btn hover:bg-base-300 btn-circle" routerLink="/profile">
         <i class="text-lg fa-solid fa-user-astronaut"></i>
       </a>
     }
