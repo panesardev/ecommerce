@@ -20,7 +20,9 @@ import AcceptPrivacyPolicyComponent from './layout/components/accept-privacy-pol
       </main>
       <app-footer />
     </app-navbar>
-    <app-accept-privacy-policy />
+    @defer {
+      <app-accept-privacy-policy />
+    }
   `,
 })
 export class AppComponent {

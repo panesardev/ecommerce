@@ -25,7 +25,7 @@
               <div class="label">
                 <span class="label-text">Enter full name</span>
               </div>
-              <input type="text" class="input input-primary input-bordered" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="John Wick"/>
+              <input type="text" class="input input-primary input-bordered" name="displayName" [(ngModel)]="state().credentials.displayName" placeholder="e.g. John Wick"/>
             </label>
           }
 
@@ -33,7 +33,7 @@
             <div class="label">
               <span class="label-text">Email address</span>
             </div>
-            <input type="email" class="input input-primary input-bordered" name="email" [(ngModel)]="state().credentials.email" placeholder="john.wick@example.com"/>
+            <input type="email" class="input input-primary input-bordered" name="email" [(ngModel)]="state().credentials.email" placeholder="e.g. john.wick@example.com"/>
           </label>
           
           @if (isLoginForm() || isSignUpForm()) {

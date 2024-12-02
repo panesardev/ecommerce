@@ -7,14 +7,17 @@ import { CartStateType } from "./cart.interface";
 
 export const CartStateToken = new StateToken<CartStateType>('cart');
 
-const defaults: CartStateType = {
+const initialState: CartStateType = {
   items: [],
   subtotal: 0.00,
   total: 0.00,
   quantity: 0,
 }
 
-@State({ name: CartStateToken, defaults })
+@State({ 
+  name: CartStateToken, 
+  defaults: initialState, 
+})
 @Injectable()
 export class CartState implements NgxsOnInit {
   private storage = inject(StorageService);
@@ -46,7 +49,7 @@ export class CartState implements NgxsOnInit {
     }
     
     ctx.setState(state);
-    ctx.dispatch(new ComputeCart());
+    ctx.dispatch(ComputeCart);
   }
 
   @Action(RemoveProduct)
@@ -61,39 +64,46 @@ export class CartState implements NgxsOnInit {
         state.items[index].quantity--;
         state.items[index].price = state.items[index].price - action.product.price;
       }
-      else if (state.items[index].quantity == 0) {
+      if (state.items[index].quantity == 0) {
         state.items.splice(index, 1);
       }
     }
 
     ctx.setState(state);
-    ctx.dispatch(new ComputeCart());
+    ctx.dispatch(ComputeCart);
   }
 
   @Action(ComputeCart)
   computeCart(ctx: StateContext<CartStateType>) {
     const state = ctx.getState();
-    // compute cart.quantity
-    state.quantity = state.items.map(i => i.quantity).reduce((a, c) => a + c);
     
-    // compute cart.subtotal
-    state.subtotal = state.items.map(i => i.price).reduce((a, c) => a + c);
-    
-    // compute cart.price
-    state.total = state.subtotal + (state.subtotal * TAX);
+    if (state.items.length) {
+      // compute cart.quantity
+      state.quantity = state.items.map(i => i.quantity).reduce((a, c) => a + c);
+      
+      // compute cart.subtotal
+      state.subtotal = state.items.map(i => i.price).reduce((a, c) => a + c);
+      
+      // compute cart.price
+      state.total = state.subtotal + (state.subtotal * TAX);
 
-    ctx.setState(state);
-    ctx.dispatch(new SaveCart());
+      ctx.setState(state);
+    }
+    else {
+      ctx.setState(initialState);
+    }
+
+    ctx.dispatch(SaveCart);
+  }
+
+  @Action(ResetCart)
+  resetCart(ctx: StateContext<CartStateType>) {
+    ctx.setState(initialState);
+    ctx.dispatch(SaveCart);
   }
 
   @Action(SaveCart)
   saveCart(ctx: StateContext<CartStateType>) {
     this.storage.set('cart', ctx.getState());
-  }
-
-  @Action(ResetCart)
-  resetCart(ctx: StateContext<CartStateType>) {
-    this.storage.set('cart', defaults);
-    ctx.setState(defaults);
   }
 }

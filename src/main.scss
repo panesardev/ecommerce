@@ -49,6 +49,12 @@ section {
     animation-timeline: scroll();
     transform-origin: left;
   }
+  
+  .slider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
 }
 
 /// fonts ///

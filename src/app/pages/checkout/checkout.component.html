@@ -1,1 +1,192 @@
-<p>checkout works!</p>
+<section>
+  <h1 class="heading">Checkout</h1>
+
+  @if (cart().items.length) {
+    <div class="grid lg:grid-cols-[3fr_2fr] max-w-4xl gap-6 md:gap-8 mx-auto">
+      <div>
+        <h1 class="text-lg flex justify-between items-center gap-4 mb-6">
+          <span class="font-bold">Shopping Cart</span>
+          <span>Total {{ cart().quantity }} items</span>
+        </h1>
+
+        <div class="grid gap-2 mb-6 md:mb-8">
+          @for (item of cart().items; track item.product.id) {
+            <div class="bg-white flex flex-col md:flex-row justify-between gap-2 md:gap-6 p-4">
+              <div class="flex items-center gap-2 md:gap-4 cursor-pointer" routerLink="/view/{{ item.product.id }}">
+                <img class="w-16" [src]="item.product.images[0]" alt="image">
+                <h1 class="font-bold w-[25ch] md:w-[20ch] text-ellipsis text-nowrap overflow-hidden">{{ item.product.title }}</h1>
+              </div>
+              <div class="flex justify-end items-center gap-6">
+                <div class="bg-base-200 grid place-content-center w-fit h-fit px-3 py-1 rounded-full">{{ '$ ' + item.product.price.toFixed(2) }}</div>
+                <div class="text-center flex justify-center items-center gap-4">
+                  <div class="border-slate-200 bg-slate-100 border-2 w-12 py-1">x{{ item.quantity }}</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+
+        <h1 class="text-2xl font-bold mb-2">Enter your details</h1>
+        <form class="grid gap-3 mb-6 md:mb-8" [formGroup]="userForm">
+          <label class="form-control">
+            <div class="label"><span class="label-text">Enter full name <span class="text-red-500">*</span></span></div>
+            <input type="text" class="input input-primary input-bordered" name="name" formControlName="displayName" placeholder="e.g. John Wick" [class.border-red-500]="isFieldInvalid(userForm, 'displayName')" />
+          </label>
+    
+          <label class="form-control">
+            <div class="label"><span class="label-text">Enter email address <span class="text-red-500">*</span></span></div>
+            <input type="email" class="input input-primary input-bordered" name="email" formControlName="email" placeholder="e.g. john.wick@example.com" [class.border-red-500]="isFieldInvalid(userForm, 'email')" />
+          </label>
+        </form>
+  
+        <h1 class="text-2xl font-bold mb-2">Shipping address</h1>
+        <form class="grid gap-3 mb-6 md:mb-8" [formGroup]="addressForm">
+          <label class="form-control">
+            <div class="label"><span class="label-text">Address <span class="text-red-500">*</span></span></div>
+            <input type="text" class="input input-primary input-bordered" name="street" formControlName="street" placeholder="house no. and street name" [class.border-red-500]="isFieldInvalid(addressForm, 'street')" />
+          </label>
+          
+          <label class="form-control">
+            <div class="label"><span class="label-text">City <span class="text-red-500">*</span></span></div>
+            <input type="text" class="input input-primary input-bordered" name="city" formControlName="city" placeholder="city" [class.border-red-500]="isFieldInvalid(addressForm, 'city')" />
+          </label>
+    
+          <div class="grid grid-cols-2 gap-4">
+            <label class="form-control">
+              <div class="label"><span class="label-text">Province <span class="text-red-500">*</span></span></div>
+              <input type="text" class="input input-primary input-bordered" name="province" formControlName="province" placeholder="province" [class.border-red-500]="isFieldInvalid(addressForm, 'province')" />
+            </label>
+            
+            <label class="form-control">
+              <div class="label"><span class="label-text">Country <span class="text-red-500">*</span></span></div>
+              <input type="text" class="input input-primary input-bordered" name="country" formControlName="country" placeholder="country" [class.border-red-500]="isFieldInvalid(addressForm, 'country')" />
+            </label>
+          </div>
+          
+          <label class="form-control">
+            <div class="label"><span class="label-text">Postal code <span class="text-red-500">*</span></span></div>
+            <input type="text" class="input input-primary input-bordered" name="postal" formControlName="postal" placeholder="1A2 B3C" [class.border-red-500]="isFieldInvalid(addressForm, 'postal')" />
+          </label>
+          
+          <label class="form-control">
+            <div class="label"><span class="label-text">Delivery instructions</span></div>
+            <input type="text" class="input input-primary input-bordered" name="instructions" formControlName="instructions" placeholder="PO Box. or Suite no." />
+          </label>
+        </form>
+        
+        <h1 class="text-2xl font-bold mb-2">Payment method</h1>
+        <form class="grid gap-3 mb-6 md:mb-8" [formGroup]="paymentForm">
+          <label class="form-control">
+            <div class="label"><span class="label-text">Card number <span class="text-red-500">*</span></span></div>
+            <input type="text" class="input input-primary input-bordered" name="cardNumber" formControlName="cardNumber" placeholder="16 digit card number" [class.border-red-500]="isFieldInvalid(paymentForm, 'cardNumber')" />
+          </label>
+          
+          <div class="grid grid-cols-2 gap-4">
+            <label class="form-control">
+              <div class="label"><span class="label-text">Expiry date <span class="text-red-500">*</span></span></div>
+              <input type="text" class="input input-primary input-bordered" name="expiryDate" formControlName="expiryDate" placeholder="MM/YY" [class.border-red-500]="isFieldInvalid(paymentForm, 'expiryDate')" />
+            </label>
+            
+            <label class="form-control">
+              <div class="label"><span class="label-text">Cvv <span class="text-red-500">*</span></span></div>
+              <input type="text" class="input input-primary input-bordered" name="cvv" formControlName="cvv" placeholder="3 digit at back" [class.border-red-500]="isFieldInvalid(paymentForm, 'cvv')" />
+            </label>
+          </div>
+        </form>
+      </div>
+
+      <div>
+        <div class="sticky top-40">
+          <div class="bg-base-300 grid h-fit gap-4 mb-8 md:mb-10 p-6 md:p-8">
+            <h1 class="text-xl font-bold">Order Summary</h1>
+            
+            <div class="flex justify-between items-center gap-4">
+              <span>Your subtotal</span>
+              <span>$ {{ cart().subtotal.toFixed(2) }}</span>
+            </div>
+            
+            <div class="flex justify-between items-center gap-4">
+              <span>Taxes (13%)</span>
+              <span>$ {{ (cart().subtotal * TAX).toFixed(2) }}</span>
+            </div>
+            
+            <div class="flex justify-between items-center gap-4">
+              <span>Estimated shipping</span>
+              <span class="font-bold text-green-500">FREE</span>
+            </div>
+            <div class="border-[1px] border-base-100"></div>
+            
+            <div class="font-bold flex justify-between items-center gap-4">
+              <span>Total Cost</span>
+              <span>$ {{ cart().total.toFixed(2) }}</span>
+            </div>
+  
+            <div class="grid gap-1">
+              @if (userForm.invalid) {
+                <p class="text-red-500">User details are invalid</p>
+              }
+              
+              @if (addressForm.invalid) {
+                <p class="text-red-500">Shipping information is invalid</p>
+              }
+              
+              @if (paymentForm.invalid) {
+                <p class="text-red-500">Payment method is invalid</p>
+              }
+            </div>
+
+            <button class="btn btn-primary disabled:bg-base-200" [disabled]="userForm.invalid || addressForm.invalid || paymentForm.invalid" (click)="placeOrder()">Place Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  @else {
+    <div class="text-center text-xl">
+      <p class="mb-6">Cart is empty!</p>
+      <a routerLink="/new-arrivals" class="btn btn-primary">Shop clothes</a>
+    </div>
+  }
+</section>
+
+<dialog class="modal select-none" #alertModal>
+  <div class="modal-box">
+    <h3 class="text-2xl font-bold">Attention!</h3>
+    <p class="py-4">Please do not enter your sensitive information before reading privacy policy.</p>
+    <a routerLink="/privacy-policy">Read Privacy Policy</a>
+    <div class="modal-action">
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-primary px-8">I Understand</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal select-none" #orderModal>
+  <div class="modal-box">
+    <h3 class="text-2xl font-bold">Your order has been placed!</h3>
+    <p class="py-4">See your profile to view your orders.</p>
+    <div class="modal-action gap-6">
+      <button (click)="closeOrderModal()">Close</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-primary px-8" routerLink="/profile">Profile</button>
+      </form>
+    </div>
+  </div>
+</dialog>
+
+<dialog class="modal select-none" #loginModal>
+  <div class="modal-box">
+    <h3 class="text-2xl font-bold">Attention!</h3>
+    <p class="py-4">You need to be logged in to place orders.</p>
+    <div class="modal-action gap-6">
+      <button (click)="closeLoginModal()">Close</button>
+      <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn btn-primary px-8" routerLink="/login">Profile</button>
+      </form>
+    </div>
+  </div>
+</dialog>

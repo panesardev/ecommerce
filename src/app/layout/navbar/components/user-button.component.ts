@@ -10,14 +10,14 @@ import { AuthService } from '@app/auth/auth.service';
   ],
   template: `
     @if (user(); as user) {
-      <a class="btn hover:bg-base-300 btn-circle" routerLink="/profile">
+      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/profile" class="btn hover:base-300 btn-circle">
         <i class="text-lg fa-solid fa-user-astronaut"></i>
-      </a>
+      </label>
     }
     @else {
-      <a class="btn hover:bg-base-300 btn-circle" routerLink="/login">
+      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="btn hover:base-300 btn-circle">
         <i class="text-lg fa-solid fa-user-astronaut"></i>
-      </a>
+      </label>
     }
   `,
 })

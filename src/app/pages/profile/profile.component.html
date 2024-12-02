@@ -1,1 +1,62 @@
-<p>profile works!</p>
+@if (user(); as user) {
+  <section>
+    <h1 class="heading">Profile</h1>
+  
+    <div class="max-w-2xl mx-auto">
+      <h1 class="font-bold text-2xl text-center mb-8">Your Orders</h1>
+
+      @if (orders().length) {
+        @for (order of orders(); track order.id) {
+          <div class="bg-base-300 mb-6 p-4 md:p-8">
+            <h1 class="font-bold text-xl mb-2">{{ order.user.displayName }}</h1>
+            <p class="mb-4">{{ formatAddress(order.address) }}</p>
+            <div class="grid gap-2 mb-6 md:mb-8">
+              @for (item of order.items; track item.product.id) {
+                <div class="bg-white flex flex-col md:flex-row justify-between gap-2 md:gap-6 p-4">
+                  <div class="flex items-center gap-2 md:gap-4 cursor-pointer" routerLink="/view/{{ item.product.id }}">
+                    <img class="w-16" [src]="item.product.images[0]" alt="image">
+                    <h1 class="font-bold w-[25ch] md:w-[20ch] text-ellipsis text-nowrap overflow-hidden">{{ item.product.title }}</h1>
+                  </div>
+                  <div class="flex justify-end items-center gap-6">
+                    <div class="bg-base-200 grid place-content-center w-fit h-fit px-3 py-1 rounded-full">{{ '$ ' + item.product.price.toFixed(2) }}</div>
+                    <div class="text-center flex justify-center items-center gap-4">
+                      <div class="border-slate-200 bg-slate-100 border-2 w-12 py-1">x{{ item.quantity }}</div>
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+            <div class="lg:flex justify-between gap-4">
+              <div class="flex items-center gap-4 mb-4 md:mb-0">
+                <span class="border-2 border-base-100 px-4 py-2">${{ order.total }}</span>
+                <span class="border-2 border-base-100 px-4 py-2">{{ order.created }}</span>
+              </div>
+              <button class="btn btn-primary w-full md:w-fit px-8" (click)="deleteOrder(order.id)">Delete</button>
+            </div>
+          </div>
+        }
+      }
+      @else {
+        <div class="grid justify-center">
+          <p class="mb-6">You do not have any orders yet.</p>
+          <button class="btn btn-primary px-8">Shop clothes</button>
+        </div>
+      }
+    </div>
+  
+  </section>
+  
+  <dialog class="modal select-none" #logoutModal>
+    <div class="modal-box">
+      <h3 class="text-2xl font-bold">Attention!</h3>
+      <p class="py-4">You will be logged out.</p>
+      <div class="modal-action gap-6">
+        <button (click)="closeLogoutModal()">Close</button>
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-primary px-8" routerLink="/login">Profile</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+}

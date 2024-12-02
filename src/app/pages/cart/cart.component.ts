@@ -29,7 +29,7 @@ export default class CartComponent {
   }
   
   resetCart() {
-    this.store.dispatch(new ResetCart());
+    this.store.dispatch(ResetCart);
   }
 
 }

@@ -4,9 +4,7 @@ import { AuthProviderName, UserData } from "./auth.interface";
 export function createUserData(): UserData {
   return {
     products: [],
-    // addresses: [],
-    // payments: [],
-    // orders: [],
+    orders: [],
   };
 }
 

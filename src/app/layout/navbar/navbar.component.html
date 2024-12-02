@@ -11,9 +11,9 @@
         <!-- center -->
         <div class="hidden lg:flex text-lg justify-center items-center gap-6">
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/new-arrivals">New Arrivals</a>
-          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/checkout">Checkout</a>
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/login">Login</a>
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/about">About</a>
+          <a class="hover:underline" routerLinkActive="font-bold" routerLink="/checkout">Checkout</a>
           <a class="hover:underline" routerLinkActive="font-bold" routerLink="/privacy-policy">Privacy</a>
         </div>
         <!-- right -->
@@ -65,9 +65,9 @@
           <app-user-button />
         }
         @placeholder {
-          <a class="btn hover:bg-base-300 btn-circle" routerLink="/login">
+          <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="btn hover:base-300 btn-circle">
             <i class="text-lg fa-solid fa-user-astronaut"></i>
-          </a>
+          </label>
         }
         <label for="my-drawer-3" role="button" aria-label="close sidebar" class="btn hover:base-300 btn-circle">
           <i class="text-xl fa-solid fa-xmark"></i>
@@ -81,5 +81,5 @@
         <label class="hover:bg-base-200 rounded-full px-6 py-3" routerLinkActive="bg-base-200" routerLink="/privacy-policy" for="my-drawer-3" role="link" aria-label="close sidebar">Privacy</label>
       </div>
     </div>
-  </div>
+  </div>3
 </div>

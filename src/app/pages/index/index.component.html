@@ -1,2 +1,40 @@
-<section>
-</section>
+<div class="-mx-4 -mt-8 md:-mx-8">
+  
+  <div class="slider h-[200px] md:h-[500px] mb-4 md:mb-8">
+    <img class="h-full w-auto" class="absolute z-5" [ngSrc]="images[currentImageIndex()]" width="3000" height="500" priority />
+    <div class="absolute z-5 top-[100px] md:top-[50%] left-[50%] md:left-[200px] translate-y-[-50%] translate-x-[-50%] md:translate-x-[0%] bg-gradient-to-r from-base-300 to-base-200 p-6">
+      <div class="text-2xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-stone-700 to-primary mb-3">
+        <p>Shop Unique</p> 
+        <p>Modern Style</p>
+      </div>
+      <button class="btn btn-primary px-8" routerLink="/new-arrivals">New arrivals</button>
+    </div>
+  </div>
+
+  <div class="grid md:grid-cols-3 gap-8">
+    <div>
+      <a routerLink="/mens" aria-label="mens">
+        <img class="h-full w-auto" ngSrc="/img/men-1.jpg" alt="men" width="250" height="600">
+      </a>
+    </div>
+    <div class="bg-gradient-to-b from-base-300 p-4 md:p-8">
+      <p class="text-3xl my-8 pb-8 border-b-2 border-b-base-200">Vast collection of fashionable clothes</p>
+
+      <div class="grid justify-center mb-16">
+        <div class="text-3xl md:text-6xl">Men</div>
+        <div class="text-3xl md:text-6xl">Women</div>
+      </div>
+
+      <div class="flex justify-center">
+        <button class="btn btn-primary px-8" routerLink="/new-arrivals">New arrivals</button>
+      </div>
+    </div>
+    <div>
+      <a routerLink="/womens" aria-label="womens">
+        <img class="h-full w-auto" ngSrc="/img/women-1.jpg" alt="women" width="250" height="600">
+      </a>
+    </div>
+  </div>
+
+
+</div>

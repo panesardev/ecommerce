@@ -1,12 +1,7 @@
 <section>
   <h1 class="heading">Your Cart</h1>
 
-  <div class="max-w-2xl mx-auto">
-    @if (!cart().items.length) {
-      <p>Cart is empty!</p>
-      <a routerLink="/new-arrivals" class="text-primary hover:underline">Shop clothing</a>
-    }
-    
+  <div class="max-w-2xl mx-auto">    
     @if (cart().items.length) {
       <div class="grid gap-2 mb-6 md:mb-8">
         @for (item of cart().items; track item.product.id) {
@@ -51,6 +46,12 @@
 
         <button routerLink="/checkout" class="btn btn-primary">Continue to checkout</button>
         <button class="btn bg-base-300 hover:bg-base-200 text-red-500 px-6 py-3" (click)="resetCart()">Reset Cart</button>
+      </div>
+    }
+    @else {
+      <div class="text-center text-xl">
+        <p class="mb-6">Cart is empty!</p>
+        <a routerLink="/new-arrivals" class="btn btn-primary">Shop clothes</a>
       </div>
     }
   </div>

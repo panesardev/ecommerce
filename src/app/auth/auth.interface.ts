@@ -1,13 +1,12 @@
 import { User as FirebaseUser } from '@angular/fire/auth';
+import { Order } from '@app/domains/orders/order.interface';
 import { Product } from '@app/domains/products/product.interface';
 
 export interface User extends FirebaseUser, UserData {}
 
 export interface UserData {
   products: Product['id'][];
-  // addresses: Address[];
-  // payments: Payment[];
-  // orders: Order[];
+  orders: Order[];
 }
 
 export type AuthProviderName = 'google' | 'github';
