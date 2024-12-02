@@ -14,9 +14,9 @@ export default class IndexComponent {
   private platform = inject(PLATFORM_ID);
 
   images: string[] = [
+    '/img/img1.jpg',
     '/img/img2.jpg',
     '/img/img3.jpg',
-    '/img/img4.jpg',
   ];
   
   currentImageIndex = signal(0);
