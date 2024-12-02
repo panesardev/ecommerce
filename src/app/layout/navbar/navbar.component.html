@@ -32,9 +32,12 @@
               <app-user-button />
             }
             @placeholder {
-              <a class="btn hover:bg-base-300 btn-circle" routerLink="/login">
+              <a routerLink="/login" class="hidden lg:inline-flex btn hover:bg-base-300 btn-circle">
                 <i class="text-lg fa-solid fa-user-astronaut"></i>
               </a>
+              <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="lg:hidden btn hover:base-300 btn-circle">
+                <i class="text-lg fa-solid fa-user-astronaut"></i>
+              </label>
             }
           </div>
           <div class="lg:hidden block">
@@ -65,7 +68,10 @@
           <app-user-button />
         }
         @placeholder {
-          <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="btn hover:base-300 btn-circle">
+          <a routerLink="/login" class="hidden lg:inline-flex btn hover:bg-base-300 btn-circle">
+            <i class="text-lg fa-solid fa-user-astronaut"></i>
+          </a>
+          <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="lg:hidden btn hover:base-300 btn-circle">
             <i class="text-lg fa-solid fa-user-astronaut"></i>
           </label>
         }

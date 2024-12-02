@@ -10,12 +10,18 @@ import { AuthService } from '@app/auth/auth.service';
   ],
   template: `
     @if (user(); as user) {
-      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/profile" class="btn hover:base-300 btn-circle">
+      <a routerLink="/profile" class="hidden lg:inline-flex btn hover:bg-base-300 btn-circle">
+        <i class="text-lg fa-solid fa-user-astronaut"></i>
+      </a>
+      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/profile" class="lg:hidden btn hover:base-300 btn-circle">
         <i class="text-lg fa-solid fa-user-astronaut"></i>
       </label>
     }
     @else {
-      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="btn hover:base-300 btn-circle">
+      <a routerLink="/login" class="hidden lg:inline-flex btn hover:bg-base-300 btn-circle">
+        <i class="text-lg fa-solid fa-user-astronaut"></i>
+      </a>
+      <label for="my-drawer-3" role="button" aria-label="close sidebar" routerLink="/login" class="lg:hidden btn hover:base-300 btn-circle">
         <i class="text-lg fa-solid fa-user-astronaut"></i>
       </label>
     }
